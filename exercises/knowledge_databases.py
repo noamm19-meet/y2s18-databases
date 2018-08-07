@@ -16,18 +16,48 @@ def add_article(article_topic , article_title , article_rating):
 	session.add(article_object)
 	session.commit()
 
-add_article("sdfsd" , "sdf" , 10)
 def query_all_articles():
-	pass
+	knowledge = session.query(
+		Knowledge).all()
+	return knowledge
 
-def query_article_by_topic():
-	pass
 
-def delete_article_by_topic():
-	pass	
+def query_article_by_topic(article_topic):
+	article_by_topic = session.query(
+		Knowledge).filter_by(
+		article_topic=article_topic).all()
+	return article_by_topic
+
+
+def delete_article_by_topic(article_topic):
+		session.query(Knowledge).filter_by(
+			article_topic=article_topic).delete()
+		session.commit()
 
 def delete_all_articles():
-	pass
+	session.query(Knowledge).delete()
+	session.commit()
+
 
 def edit_article_rating():
 	pass
+
+def edit_rating(title , updated_rating):
+	article = session.query(Knowledge).filter_by(
+		article_title=title).all()
+	article.article_rate=updated_rating
+	session.commit()
+
+
+#add_article("art1" , "title1" , "6")
+#add_article("art1.1" , "title1" , "7")
+#add_article("art2" , "title1" , "8")
+#add_article("art3" , "title2" , "9")
+#add_article("art4" , "title3" , "10")
+#add_article("art5" , "title4" , "6")
+#delete_all_articles()
+edit_rating("title1" , 10)
+print(query_all_articles())
+
+#edit_rating("title1" , 10)
+

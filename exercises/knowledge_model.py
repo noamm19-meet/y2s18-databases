@@ -25,8 +25,6 @@ class Knowledge(Base):
 		self.article_id
 		)
 
-x=Knowledge ( article_id = 3, article_topic="tables" , article_title="table1" , article_rate=10)
-print(x)
 
 	# Create a table with 4 columns
 	# The first column will be the primary key
