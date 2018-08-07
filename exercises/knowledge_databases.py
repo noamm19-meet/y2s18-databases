@@ -45,19 +45,26 @@ def edit_article_rating():
 def edit_rating(title , updated_rating):
 	article = session.query(Knowledge).filter_by(
 		article_title=title).all()
-	article.article_rate=updated_rating
+	for x in article:
+		x.article_rate=updated_rating
+		session.commit()
+
+def delete_article_by_rating(threshold):
+	art_rate=session.query(Knowledge).all()
+	for x in art_rate:
+		if x.article_rate<threshold:
+			x.delete()
 	session.commit()
 
-
 #add_article("art1" , "title1" , "6")
-#add_article("art1.1" , "title1" , "7")
+#add_article("art1." , "title1" , "7")
 #add_article("art2" , "title1" , "8")
 #add_article("art3" , "title2" , "9")
 #add_article("art4" , "title3" , "10")
 #add_article("art5" , "title4" , "6")
 #delete_all_articles()
-edit_rating("title1" , 10)
+#edit_rating("title1" , 10)
+delete_article_by_rating(10)
 print(query_all_articles())
-
 #edit_rating("title1" , 10)
 
